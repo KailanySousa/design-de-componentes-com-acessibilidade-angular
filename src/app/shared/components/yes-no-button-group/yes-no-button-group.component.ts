@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-yes-no-button-group',
@@ -8,4 +8,17 @@ import { Component, Input } from '@angular/core';
 export class YesNoButtonGroupComponent {
   @Input() public value: string = null;
   @Input() public label: string = '';
+  @Output() public valueChange = new EventEmitter<string>();
+
+  public options = YesNoButtonGroupOptions;
+
+  public activate(value: string) {
+    this.value = value;
+    this.valueChange.emit(this.value);
+  }
+}
+
+enum YesNoButtonGroupOptions {
+  YES = 'yes',
+  NO = 'no'
 }
